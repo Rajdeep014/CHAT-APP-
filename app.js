@@ -48,7 +48,11 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Replace with your frontend URL
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      process.env.CLIENT_URL,
+    ], // Replace with your frontend URL
     credentials: true,
   },
 });
@@ -172,3 +176,4 @@ server.listen(port, () => {
   console.log(`Server is running on port ${port} in ${envMode}`);
 });
 export { adminSecretKey, envMode, userSocketIDs };
+
